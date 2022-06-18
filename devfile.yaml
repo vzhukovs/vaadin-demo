@@ -1,0 +1,52 @@
+schemaVersion: 2.1.0
+metadata:
+  name: vaadin-demo
+components:
+  - name: postgres
+    container:
+      image: postgres:14.3-alpine
+      memoryLimit: 300Mi
+      endpoints:
+        - exposure: none
+          name: db
+          protocol: tcp
+          targetPort: 5432
+      env:
+        - name: POSTGRES_PASSWORD
+          value: postgres
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_DB
+          value: postgres
+      volumeMounts:
+        - name: postgres-data
+          path: /var/lib/postgresql/data/pgdata
+  - name: dev
+    container:
+      image: quay.io/devfile/universal-developer-image:ubi8-9436df2
+      memoryLimit: 3Gi
+      endpoints:
+        - exposure: none
+          name: debug
+          protocol: tcp
+          targetPort: 5005
+        - exposure: public
+          name: 8080-tcp
+          protocol: http
+          targetPort: 8080
+      volumeMounts:
+        - name: m2
+          path: /home/user/.m2
+  - name: postgres-data
+    volume:
+      size: 256Mi
+  - name: m2
+    volume:
+      size: 1G
+commands:
+  - id: run-dev
+    exec:
+      label: Run using spring-boot:run
+      component: dev
+      commandLine: >-
+        ./mvnw
