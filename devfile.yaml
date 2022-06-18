@@ -60,7 +60,7 @@ commands:
       label: Maven Build
       component: dev
       commandLine: >-
-        ./mvn clean install
+        ./mvnw clean install
       workingDir: ${PROJECT_SOURCE}
       group:
         kind: build
