@@ -22,6 +22,9 @@ public class AboutView extends VerticalLayout {
         add(new H2("This place intentionally left empty"));
         add(new Paragraph("It’s a place where you can grow your own UI 🤗"));
 
+        String paragraphContent = "Some paragraph content";
+        add(new Paragraph(paragraphContent));
+
         setSizeFull();
         setJustifyContentMode(JustifyContentMode.CENTER);
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
