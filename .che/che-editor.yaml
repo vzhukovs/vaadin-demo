@@ -5,12 +5,12 @@ inline:
   commands:
     - id: init-container-command
       apply:
-        component: idea-injector
+        component: che-idea-injector
   events:
     preStart:
       - init-container-command
   components:
-    - name: idea-ic
+    - name: che-idea-runtime-description
       container:
         image: 'quay.io/devfile/universal-developer-image:ubi8-9436df2'
         command:
@@ -65,7 +65,7 @@ inline:
               discoverable: false
               urlRewriteSupported: true
       attributes:
-        app.kubernetes.io/component: idea-injector
+        app.kubernetes.io/component: che-idea-injector
         app.kubernetes.io/part-of: che-idea.eclipse.org
     - name: projector-volume
       volume: { }
@@ -73,7 +73,7 @@ inline:
       volume: { }
     - name: projector-java-configuration
       volume: { }
-    - name: idea-injector
+    - name: che-idea-injector
       container:
         image: 'quay.io/vzhukovs/che-idea:machine-exec-support'
         command: ["/projector/entrypoint-init-container.sh"]
