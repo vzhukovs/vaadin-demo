@@ -5,7 +5,7 @@ inline:
   commands:
     - id: init-container-command
       apply:
-        component: che-idea-injector
+        component: idea-injector
   events:
     preStart:
       - init-container-command
